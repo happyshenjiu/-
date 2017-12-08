@@ -1,5 +1,4 @@
-//引入material主题样式
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import 'theme.scss';
 
 html,body,app-root,mat-sidenav-container,.side{
   width: 100%;
@@ -12,4 +11,12 @@ html,body,app-root,mat-sidenav-container,.side{
 }
 main{
   flex: 1;
+}
+
+.fill-remaining-space{
+  //使用flexbox填充剩余空间
+  flex: 1 1 auto;
+}
+.full-width{
+  width: 100%;
 }

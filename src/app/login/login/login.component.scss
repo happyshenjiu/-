@@ -1,0 +1,20 @@
+form{
+  display: flex;
+  flex-direction: row;  //纵向排列
+  justify-content: center;  //纵向居中
+  align-items: center;  //横向居中
+  height: 100%;
+  width: 100%;
+}
+
+mat-card{
+  height: 25em;
+  flex: 0 0 20em;
+}
+.text-right{
+  margin: 10px;
+  text-align: end;
+}
+.myapp-dark-theme .mat-form-field{
+width: 100%;
+}

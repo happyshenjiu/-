@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+// import { OverLayContainer } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
+  darkTheme = false;
+  constructor(
+    // private oc: OverLayContainer
+  ){}
+  switchTheme(dark){
+    this.darkTheme = dark;
+    // this.oc.themeClass = dark? 'myapp-dark-theme':null;  //处理dialog 和 弹出菜单menu 不适用黑夜模式的问题
+  }
 }

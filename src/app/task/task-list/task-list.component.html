@@ -1,0 +1,9 @@
+<!--在组件之间包含其他组建，用ng-content即可-->
+<!--
+即：父组件中的以下内容就是放在ng-content的位置
+<app-task-header [header]="list.name"></app-task-header>
+<app-task-item *ngFor="let task of list.tasks"></app-task-item>
+-->
+<mat-list>
+  <ng-content></ng-content>
+</mat-list>
