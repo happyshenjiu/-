@@ -2,6 +2,7 @@
 import { NgModule, SkipSelf, Optional } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from '../app-routing.module';
 //外部svg用到
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -17,9 +18,10 @@ import 'hammerjs';
 
 @NgModule({
   imports: [
-    BrowserAnimationsModule,
+    AppRoutingModule,
     HttpModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule  //尽量放在所有import的最后
   ],
   declarations: [
     HeaderComponent,
@@ -30,7 +32,9 @@ import 'hammerjs';
   exports:[
     HeaderComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    AppRoutingModule,
+    // BrowserAnimationsModule
   ]
 })
 export class CoreModule {

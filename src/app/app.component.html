@@ -5,7 +5,7 @@
   side:  跟main并排在一起，不盖header和footer;
   push:  将herder,main.footer都往右挤-->
   <mat-sidenav #sidenav mode="over">
-    <app-sidebar></app-sidebar>
+    <app-sidebar (navClick)="sidenav.toggle()"></app-sidebar>
   </mat-sidenav>
   <div class="side">
     <header>
