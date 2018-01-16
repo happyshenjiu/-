@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="form" (ngSubmit)="onSubmit(form, $event)">
   <mat-card>
     <mat-card-header>
       <mat-card-title>注册：</mat-card-title>
@@ -8,39 +8,44 @@
         <input matInput
                type="email"
                required
-               placeholder="您的邮箱：">
+               placeholder="您的邮箱：" formControlName="email">
       </mat-input-container>
       <mat-input-container floatPlaceholder="auto" class="full-width">
         <input matInput
                type="text"
                required
-               placeholder="您的姓名：">
+               placeholder="您的姓名：" formControlName="name">
       </mat-input-container>
       <mat-input-container floatPlaceholder="auto" class="full-width">
         <input matInput
                type="password"
                required
-               placeholder="您的密码：">
+               placeholder="您的密码：" formControlName="password">
       </mat-input-container>
       <mat-input-container floatPlaceholder="auto" class="full-width">
         <input matInput
                type="password"
                required
-               placeholder="再次输入您的密码：">
+               placeholder="再次输入您的密码：" formControlName="repeat">
       </mat-input-container>
-      <mat-grid-list cols="6"> <!--rowHeight="1:1"  长高比是1：1，是个方块-->
-        <mat-grid-tile *ngFor="let item of items">
-          <mat-icon class="avatar" [svgIcon]="item"></mat-icon>
-        </mat-grid-tile>
-      </mat-grid-list>
-      <button  type="button" mat-raised-button color="primary" (click)="onAction1">注册</button>
+
+      <!--使用自定义表单控件-->
+     <app-image-list-select
+       [useSvgIcon]="true"
+       [cols]="6"
+       [title]="'选择头像：'"
+       [items]="items"
+       formControlName="avatar"
+     ></app-image-list-select>
+
+      <button  type="submit" mat-raised-button color="primary">注册</button>
     </mat-card-content>
     <mat-card-actions align="end">
       <p>还没有账户？<a href="">登录</a> </p>
       <p>忘记密码？<a href="">找回</a> </p>
     </mat-card-actions>
     <mat-card-footer>
-      Footer
+
     </mat-card-footer>
   </mat-card>
 </form>

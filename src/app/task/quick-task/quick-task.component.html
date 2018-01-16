@@ -1,0 +1,9 @@
+<!--<form #f="ngForm" (ngSubmit)="onSubmit(f, $event)">-->
+  <mat-input-container color="primary" class="full-width" >
+    <input matInput type="text" placeholder="再这里快速创建一个新任务:" [(ngModel)]="desc" name="desc">
+    <button type="button" matSuffix mat-icon-button (click)="sendQuickTask()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </mat-input-container>
+<!--</form>-->
+

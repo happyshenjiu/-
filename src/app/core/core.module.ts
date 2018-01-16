@@ -3,6 +3,7 @@ import { NgModule, SkipSelf, Optional } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from '../app-routing.module';
+import { ServiceModule } from '../service/service.module';
 //外部svg用到
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -15,12 +16,14 @@ import { FooterComponent } from './footer/footer.component'
 import {loadSvgResources} from "../utils/svg.utils";
 
 import 'hammerjs';
+import 'rxjs/add/operator/take';
 
 @NgModule({
   imports: [
     AppRoutingModule,
     HttpModule,
     SharedModule,
+    ServiceModule.forRoot(),
     BrowserAnimationsModule  //尽量放在所有import的最后
   ],
   declarations: [

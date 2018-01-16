@@ -1,10 +1,30 @@
+
+form{
+  display: flex;
+  flex-direction: row;  //纵向排列
+  justify-content: center;  //纵向居中
+  align-items: center;  //横向居中
+  height: 100%;
+  width: 100%;
+}
+
+mat-card{
+  width: 600px;
+  flex: 0 0 600px;
+}
+.text-right{
+  margin: 10px;
+  text-align: end;
+}
+.myapp-dark-theme .mat-form-field{
+  width: 100%;
+}
+
+
 mat-icon.avatar{
   width: 64px;
   height: 64px;
   border-radius: 50%;
   overflow: hidden;
   margin: 12px;
-}
-mat-card{
-  width: 600px;
 }

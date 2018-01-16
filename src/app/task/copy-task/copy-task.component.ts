@@ -1,11 +1,12 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 //MAT_DIALOG_DATA  接受参数
 //MatDialogRef 回传参数
 @Component({
   selector: 'app-copy-task',
   templateUrl: './copy-task.component.html',
-  styleUrls: ['./copy-task.component.scss']
+  styleUrls: ['./copy-task.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CopyTaskComponent implements OnInit {
 

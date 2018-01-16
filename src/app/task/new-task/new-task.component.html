@@ -5,8 +5,8 @@
     <mat-input-container color="primary" class="full-width" >
       <input matInput type="text" placeholder="任务内容:">
     </mat-input-container>
-
-    <mat-radio-group formControlName="priority" [align]="'start'" class="full-width">
+<!--formControlName="priority"-->
+    <mat-radio-group  [align]="'start'" class="full-width">
       <mat-radio-button *ngFor="let priority of priorities" [value]="priority.value">
         {{priority.label}}
       </mat-radio-button>

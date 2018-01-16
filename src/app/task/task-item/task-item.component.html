@@ -1,3 +1,4 @@
+<!--   [draggedClass]="'drag-start'"  中'drag-star' 要加单引号，不然会被认为时一个成员变量  -->
 <mat-list-item class="container"
                [@item]="widerPriority"
                [ngClass]="{
@@ -5,7 +6,12 @@
                'priority-important':item.priority === 2,
                'priority-emergency':item.priority === 1
                }"
+               [app-draggable]="true"
+               [dragTag]="'task-item'"
+               [dragData]="item"
+               [draggedClass]="'drag-start'"
                (click)="onItemClick()">
+
   <mat-checkbox
     class="status"
     [checked]="item.completed"
