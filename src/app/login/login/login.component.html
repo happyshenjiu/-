@@ -30,12 +30,12 @@
         每日佳句
       </mat-card-title>
       <mat-card-subtitle>
-        满足感在于不断的努力，而不是现有成就，全新努力定会胜利满满！
+        {{quote.cn}}
       </mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="/assets/images/quote_fallback.jpg" alt="" />
+    <img mat-card-image [src]="quote.pic" alt="quote image" />
     <mat-card-content>
-      <p>Satisfaction lies in continuous efforts, not existing achievements, new efforts will be full of success!</p>
+      <p>{{quote.en}}</p>
     </mat-card-content>
   </mat-card>
 </form>

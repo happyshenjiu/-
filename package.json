@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "server": "json-server --watch mock/data.json --port 3002",
+    "server": "json-server --watch mock/data.json --port 3000",
     "ng": "ng",
     "start": "concurrently \"ng serve --port=8000\" \"npm run server\"",
     "build": "ng build",

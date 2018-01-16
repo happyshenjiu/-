@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
+import { QuoteService } from '../../service/quote.service';
+import { Quote } from '../../domain/quote.model';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +11,20 @@ import { FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
+  quote: Quote = {
+    cn: '满足感在于不断的努力，而不是现有成就，全新努力定会胜利满满！',
+    en: 'Satisfaction lies in continuous efforts, not existing achievements, new efforts will be full of success!',
+    pic: '/assets/images/quote_fallback.jpg'
+  };
 
-  constructor( private fb: FormBuilder) { }
+  constructor( 
+    private fb: FormBuilder,
+    private quoteService$: QuoteService   //后面加一个$表示这是一个流
+  ) {
+    this.quoteService$
+    .getQuote()
+    .subscribe(q => this.quote = q);
+   }
 
   ngOnInit() {
    /* this.form = new FormGroup({
