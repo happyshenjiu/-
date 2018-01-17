@@ -1,3 +1,5 @@
+//自己写一个Rx操作符
+//操作符三个状态： next（正常情况下执行）,error（报错）,complete(结束)
 import {Observable} from 'rxjs/Observable';
 import {environment} from '../../environments/environment';
 
