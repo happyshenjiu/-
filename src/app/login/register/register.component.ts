@@ -24,12 +24,17 @@ export class RegisterComponent implements OnInit {
       name: [],
       password: [],
       repeat: [],
-      avatar: [img]
+      avatar: [img],
+      dateOfBirth: []
     });
   }
 
   onSubmit({value,valid}, ev: Event){
-
+    ev.preventDefault();
+    if(!valid){
+      return;
+    }
+    console.log(value);
   }
 
 }

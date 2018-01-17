@@ -9,6 +9,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 
 import { DirectiveModule } from '../directive/directive.module';
 import { ImageListSelectComponent } from './image-list-select/image-list-select.component';
+import { AgeInputComponent } from './age-input/age-input.component';
 
 @NgModule({
   //既倒入也导出，别处也可用，不仅限于shared.Module模块
@@ -62,7 +63,8 @@ import { ImageListSelectComponent } from './image-list-select/image-list-select.
     ImageListSelectComponent
   ],
   declarations: [
-    ConfirmDialogComponent,
+    ConfirmDialogCo,
+    AgeInputComponentmponent,
     ImageListSelectComponent
   ],
   entryComponents:[

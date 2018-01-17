@@ -29,7 +29,7 @@
                placeholder="再次输入您的密码：" formControlName="repeat">
       </mat-input-container>
 
-      <!--使用自定义表单控件-->
+      <!--使用自定义表单控件 image-list-select-->
      <app-image-list-select
        [useSvgIcon]="true"
        [cols]="6"
@@ -37,6 +37,9 @@
        [items]="items"
        formControlName="avatar"
      ></app-image-list-select>
+
+     <!--使用自定义表单控件 age-input-->
+     <app-age-input formControlName="dateOfBirth"></app-age-input>
 
       <button  type="submit" mat-raised-button color="primary">注册</button>
     </mat-card-content>
