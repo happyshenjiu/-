@@ -46,7 +46,6 @@ export interface Age{
       provide: NG_VALIDATORS,
       useExisting: forwardRef( () => AgeInputComponent),
       multi: true
-
     }
   ]
 })
