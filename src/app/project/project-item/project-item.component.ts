@@ -15,7 +15,7 @@ export class ProjectItemComponent implements OnInit {
   @Input() item;
   @Output() onInvite = new EventEmitter<void>();  //点击邀请按钮是，告诉父组件，而不是自己做处理
   @Output() onEdit = new EventEmitter<void>();
-  @Output() onDelete = new EventEmitter<void>();
+  @Output() onDel = new EventEmitter<void>();
 
   @HostBinding('@card') cardState = 'out';  //将 cardState 这个变量绑定到 @card 上去，设初始值为 out
 
@@ -44,7 +44,7 @@ export class ProjectItemComponent implements OnInit {
   }
 
   onDeleteClick(){
-    this.onDelete.emit();
+    this.onDel.emit();
   }
 
 }
