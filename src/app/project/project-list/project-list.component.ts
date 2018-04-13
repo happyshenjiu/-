@@ -1,9 +1,9 @@
-import { 
-  Component, 
-  OnInit, 
+import {
+  Component,
+  OnInit,
   OnDestroy,
-  HostBinding, 
-  ChangeDetectionStrategy, 
+  HostBinding,
+  ChangeDetectionStrategy,
   ChangeDetectorRef} from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NewProjectComponent } from '../new-project/new-project.component';
@@ -30,8 +30,8 @@ export class ProjectListComponent implements OnInit, OnDestroy {
 
   projects;
   sub: Subscription;
-  constructor( 
-    private dialog: MatDialog, 
+  constructor(
+    private dialog: MatDialog,
     private cd: ChangeDetectorRef,
     private service$: ProjectService) { }
 
@@ -42,8 +42,8 @@ export class ProjectListComponent implements OnInit, OnDestroy {
       this.projects = projects;
 
       //在这个点上告诉 angular 你来检查我，即：外部UI的状态发生改变时你来检查，其他时候不用检查
-      //脏值检测,解决刚开始的时候projects是空的问题
-      this.cd.markForCheck();  
+      //脏值检测,能够解决刚开始的时候projects是空的报错
+      this.cd.markForCheck();
     });
   }
 
@@ -68,23 +68,21 @@ export class ProjectListComponent implements OnInit, OnDestroy {
 
   openNewProjectDialog(){
     const selectedImg = `/assets/images/covers/${Math.floor(Math.random() * 40)}_tn.jpg`;
-  
+
     const dialogRef = this.dialog
       .open(NewProjectComponent,
         {data: {thumbnails: this.getThumbnails(), img: selectedImg}});
-    
+
       dialogRef.afterClosed()  //刚开始关闭的时候，又可能是传了值之后关闭，也可能是没传值时候关闭
       .take(1)  // 不管是直接关闭还是有数据后保存，都只取一次值之后就，complete结束了
       .filter(n => n)  // 这个时候就需要过滤以下，确保是有值的
-      .map(val => ({...val, coverImg: this.buildImgSrc(val.coverImg)}))  //将val展开，将里面coverImg属性带_tn的换成不带_tn的
+      .map(val => ({...val, coverImg: this.buildImgSrc(val.coverImg)}))  //将val展开，如果val中有coverImg这个属性，就将里面该属性带_tn的换成不带_tn的
       .switchMap(v =>  this.service$.add(v))  //service$是一个流，service$.add(v)也是流，需要将两个流拍扁成一个流
       .subscribe(project => {
         this.projects = [...this.projects, project];  // [...this.projects,{...}]  表示在原来数组的基础上添加一个元素
         this.cd.markForCheck();
       });
   }
-
-  
 
   launchInviteDialog(){
     const dialogRef = this.dialog.open(InviteComponent);
@@ -93,12 +91,12 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   launchUpdateDialog(project: Project){
     const dialogRef = this.dialog
       .open(NewProjectComponent,{data: {thumbnails: this.getThumbnails(), project: project}});
-    
-      dialogRef.afterClosed() 
-        .take(1) 
-        .filter(n => n) 
-        .map(val => ({...val, id: project.id, coverImg: this.buildImgSrc(val.coverImg)}))  
-        .switchMap(v =>  this.service$.update(v))  
+
+      dialogRef.afterClosed()
+        .take(1)
+        .filter(n => n)   //因为form表单传过来的值是没有id的，所以下面map的时候要加上，顺带把coverImg转以下
+        .map(val => ({...val, id: project.id, coverImg: this.buildImgSrc(val.coverImg)}))
+        .switchMap(v =>  this.service$.update(v))
         .subscribe(project => {
           //找到该project在projects中的位置
           const index = this.projects.map(p => p.id).indexOf(project.id);
@@ -110,8 +108,8 @@ export class ProjectListComponent implements OnInit, OnDestroy {
   launchConfirmDialog(project: Project){
     const dialogRef =this.dialog.open(ConfirmDialogComponent, {data:{title:'删除项目',content:'您确认删除改项目吗？'}});
     dialogRef.afterClosed()
-      .take(1) 
-      .filter(n => n) 
+      .take(1)
+      .filter(n => n)
       .switchMap( _ => this.service$.del(project) )  // 删除的时候不关心dialog表单传过来的值，只关心参数project
       .subscribe(prj => {
         console.log(prj);

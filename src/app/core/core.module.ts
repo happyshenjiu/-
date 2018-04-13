@@ -12,8 +12,8 @@ import { SharedModule } from '../shared/shared.module';
 
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { FooterComponent } from './footer/footer.component'
-import {loadSvgResources} from "../utils/svg.utils";
+import { FooterComponent } from './footer/footer.component';
+import {loadSvgResources} from '../utils/svg.utils';
 
 import 'hammerjs';
 import '../utils/debug.util';

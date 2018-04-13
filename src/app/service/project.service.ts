@@ -5,13 +5,13 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ProjectService {
-    
+
     private readonly domain = 'projects';
     private headers = new Headers({
         'Content-Type': 'application/json'
     });
-    constructor( 
-        private http: Http, 
+    constructor(
+        private http: Http,
         @Inject('BASE_CONFIG') private config
     ){}
 
@@ -49,7 +49,7 @@ export class ProjectService {
                 listId => this.http.delete(`${this.config.url}/taskLists/${listId}`)
             )
             .count();  //mergeMap之是一系列流的数组，count()统计删除列表之后的流的数量，输出一个数量
-           
+
         //当删除完所有列表之后，发出一个数值，然后进行删除project
         return delTasks$
             .switchMap( _ => this.http.delete(`${this.config.url}/${this.domain}/${project.id}`))
@@ -58,11 +58,11 @@ export class ProjectService {
 
     //GET
     //取得项目列表
-    get(userId: string): Observable<Project[]>{
-        const url = `${this.config.url}/${this.domain}`;
-        return this.http
-        .get(url, {params: {'members_like': userId}, headers: this.headers})  //params是筛选的条件，在http://localhost:3000/projects中找project.userId跟我们这里参数userId相同的所有project
-        .map(res => res.json() as Project[]);
-    }
+     get(userId: string): Observable<Project[]>{
+    const url = `${this.config.url}/${this.domain}`;
+    return this.http
+      .get(url, {params: {'members_like': userId}, headers: this.headers})  //params是筛选的条件，在http://localhost:3000/projects中找project.userId跟我们这里参数userId相同的所有project
+      .map(res => res.json() as Project[]);
+  }
 
 }

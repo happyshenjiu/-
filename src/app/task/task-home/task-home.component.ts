@@ -1,10 +1,15 @@
-import { Component, OnInit, HostBinding, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import {NewTaskComponent} from "../new-task/new-task.component";
 import {CopyTaskComponent} from "../copy-task/copy-task.component";
 import {ConfirmDialogComponent} from "../../shared/confirm-dialog/confirm-dialog.component";
 import {NewTaskListComponent} from "../new-task-list/new-task-list.component";
 import {slideToRight} from "../../anims/router.anim";
+import { TaskListService } from '../../service/task-list.service';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from '../../../../node_modules/_rxjs@5.5.6@rxjs/Observable';
+import { TaskService } from '../../service/task.service';
+import { Task } from '../../domain/index';
 
 @Component({
   selector: 'app-task-home',
@@ -13,78 +18,103 @@ import {slideToRight} from "../../anims/router.anim";
   animations:[ slideToRight ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TaskHomeComponent implements OnInit {
+export class TaskHomeComponent implements OnInit, OnDestroy {
 
   @HostBinding('@routerAnim') state;
 
-  lists = [
-    {
-      id:1,
-      name:'待办',
-      order: 1,
-      tasks:[
-        {
-          id:1,
-          desc:'任务一：去星巴克买杯咖啡',
-          completed: true,
-          priority: 3,    //优先级
-          owner:{
-            id:1,
-            name:'张三',
-            avatar:'avatars:svg-11'
-          },
-          dueDate: new Date()
-        },
-        {
-          id:2,
-          desc:'任务二：完成老板不知的 ppt 作业',
-          completed:false,
-          priority: 2,
-          owner:{
-            id:1,
-            name:'李四',
-            avatar:'avatars:svg-12'
-          },
-          dueDate: new Date()
-        }
-      ]
-    },
-    {
-      id:2,
-      name:'执行中',
-      order: 2,
-      tasks:[
-        {
-          id:1,
-          desc:'任务三：项目代码评审',
-          completed: false,
-          priority: 1,
-          owner:{
-            id:1,
-            name:'王五',
-            avatar:'avatars:svg-13'
-          },
-          dueDate: new Date(),
-          reminder: new Date()
-        },
-        {
-          id:2,
-          desc:'任务四：制定项目计划',
-          completed: false,
-          priority: 2,
-          owner:{
-            id:1,
-            name:'郭操',
-            avatar:'avatars:svg-14'
-          },
-          dueDate: new Date()
-        }
-      ]
-    }
-  ];
-  constructor( private dialog: MatDialog, private cd: ChangeDetectorRef) { }
+  // lists = [
+  //   {
+  //     id:1,
+  //     name:'待办',
+  //     order: 1,
+  //     tasks:[
+  //       {
+  //         id:1,
+  //         desc:'任务一：去星巴克买杯咖啡',
+  //         completed: true,
+  //         priority: 3,    //优先级
+  //         owner:{
+  //           id:1,
+  //           name:'张三',
+  //           avatar:'avatars:svg-11'
+  //         },
+  //         dueDate: new Date()
+  //       },
+  //       {
+  //         id:2,
+  //         desc:'任务二：完成老板不知的 ppt 作业',
+  //         completed:false,
+  //         priority: 2,
+  //         owner:{
+  //           id:1,
+  //           name:'李四',
+  //           avatar:'avatars:svg-12'
+  //         },
+  //         dueDate: new Date()
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     id:2,
+  //     name:'执行中',
+  //     order: 2,
+  //     tasks:[
+  //       {
+  //         id:1,
+  //         desc:'任务三：项目代码评审',
+  //         completed: false,
+  //         priority: 1,
+  //         owner:{
+  //           id:1,
+  //           name:'王五',
+  //           avatar:'avatars:svg-13'
+  //         },
+  //         dueDate: new Date(),
+  //         reminder: new Date()
+  //       },
+  //       {
+  //         id:2,
+  //         desc:'任务四：制定项目计划',
+  //         completed: false,
+  //         priority: 2,
+  //         owner:{
+  //           id:1,
+  //           name:'郭操',
+  //           avatar:'avatars:svg-14'
+  //         },
+  //         dueDate: new Date()
+  //       }
+  //     ]
+  //   }
+  // ];
+
+  lists;
+  allTasks;
+  sub: Subscription;
+  sub1: Subscription;
+
+  constructor( 
+    private dialog: MatDialog, 
+    private cd: ChangeDetectorRef,
+    private taskListService$ : TaskListService,
+    private taskService$: TaskService) { }
 
   ngOnInit() {
+    this.sub = this.taskListService$
+      .get('Hya1moGb-')
+      .subscribe(taskLists => {
+        this.lists = taskLists;
+        this.cd.markForCheck();
+      });
+
+      // this.taskService$.getByLists(this.lists ? this.lists : [])
+      //   .subscribe(tasks => this.allTasks = tasks);   
+     
+      // console.log(this.allTasks);
+  }
+
+  ngOnDestroy(){
+    this.sub.unsubscribe();
   }
 
   launchNewTaskDialog(){

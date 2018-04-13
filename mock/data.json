@@ -80,13 +80,16 @@
       "id": "K0w5UDb"
     },
     {
-      "name": "更改项目名称",
-      "desc": "更改项目描述",
-      "coverImg": "/assets/images/covers/10.jpg",
-      "members": [
-        "37489e0c-df34-c261-71c4-ce75357e3035"
-      ],
-      "id": "Y2we3hH"
+      "name": "添加一个项目",
+      "desc": "添加一个项目的描述",
+      "coverImg": "/assets/images/covers/2.jpg",
+      "id": "QxZNQo_"
+    },
+    {
+      "name": "天机啊一个项目",
+      "desc": "天机啊一个项目的描述信息",
+      "coverImg": "/assets/images/covers/0.jpg",
+      "id": "7JKVZ3K"
     }
   ],
   "taskLists": [
